@@ -10,9 +10,10 @@ import io.github.ranolp.kubo.general.event.Event
 import io.github.ranolp.kubo.general.event.Events
 import io.github.ranolp.kubo.general.event.HearEvent
 import io.github.ranolp.kubo.general.side.Side
+import io.github.ranolp.kubo.general.side.Sided
 import kotlin.reflect.KClass
 
-abstract class KuboAdapter<out T : Option>(protected val option: T, val side: Side) {
+abstract class KuboAdapter<out T : Option>(protected val option: T, override val side: Side) : Sided {
     abstract fun login()
 
     abstract fun logout()

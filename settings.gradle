@@ -2,3 +2,5 @@ rootProject.name = 'Kubo-root'
 
 include 'Kubo-api'
 include 'Kubo-Telegram'
+include 'Kubo-Discord'
+

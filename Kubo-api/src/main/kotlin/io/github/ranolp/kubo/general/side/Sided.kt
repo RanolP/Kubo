@@ -1,3 +1,5 @@
 package io.github.ranolp.kubo.general.side
 
-class SidedProcessor {}
+interface Sided {
+    val side: Side
+}

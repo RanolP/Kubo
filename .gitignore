@@ -1,0 +1,10 @@
+
+\.idea/
+
+\.gradle/
+
+Kubo-Telegram/build/
+
+Kubo-api/build/
+
+build/
