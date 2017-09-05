@@ -23,8 +23,6 @@ class DiscordAdapter(option: DiscordOption) : KuboAdapter<DiscordOption>(option,
         val prefixLen = option.commandPrefix.length
         commandParser {
             val raw = it.text!!
-            println(raw.length)
-            println(prefixLen)
             if (raw.length > prefixLen && raw.substring(0, prefixLen) != option.commandPrefix) {
                 CommandParser.Result.FAIL
             } else {
