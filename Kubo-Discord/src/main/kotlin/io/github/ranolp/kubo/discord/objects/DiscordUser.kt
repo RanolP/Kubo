@@ -7,4 +7,8 @@ class DiscordUser(val jdaUser: net.dv8tion.jda.core.entities.User) : User {
     override val side = Discord.SIDE
     override val displayName: String
         get() = jdaUser.name
+
+    override fun toString(): String {
+        return displayName
+    }
 }
