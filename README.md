@@ -25,12 +25,12 @@ All dependencies are managed automatically by Gradle
 ## General
   * Kotlin Standard Library
     * Version: 1.1.3-2
-    * [Website](kotlinlang.org)
+    * [Website](https://kotlinlang.org)
 
 # Kubo-api
   * Kotlin Reflection
     * Version: 1.1.3-2
-    * [Website](kotlinlang.org)
+    * [Website](https://kotlinlang.org)
 
 ## Kubo-Discord
   * JDA
