@@ -15,15 +15,16 @@ class DiscordAdapter(option: DiscordOption) : KuboAdapter<DiscordOption>(option,
         }.buildBlocking()
         jda.addEventListener(DiscordEventAdapter)
 
+        val prefixLen = option.commandPrefix.length
         commandParser {
             val raw = it.text!!
-            if (raw[0] != option.commandPrefix) {
+            if (raw.length > prefixLen && raw.substring(0, prefixLen) != option.commandPrefix) {
                 CommandParser.Result.FAIL
             } else {
                 val space = raw.indexOf(' ')
                 val name = when {
-                    space != -1 -> raw.substring(1..space - 1)
-                    else -> raw.substring(1)
+                    space != -1 -> raw.substring(prefixLen, space)
+                    else -> raw.substring(prefixLen)
                 }
                 val arguments = when (space) {
                     -1 -> emptyList<String>()
