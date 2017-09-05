@@ -15,7 +15,7 @@ class TelegramMessage(json: JsonObject) : Message {
     val id by json.byLong("message_id")
     override val from by json.byNullable("from", ::TelegramUser)
     val whenSended by json.byLong("date")
-    override val chat by json.by("pinned_message", ::TelegramChat)
+    override val chat by json.by("chat", ::TelegramChat)
     val forwardFrom by json.byNullable("forward_from", ::TelegramUser)
     val forwardFromChat by json.byNullable("forward_from_chat", ::TelegramChat)
     val forwardFromMessageId by json.byNullableLong("forward_from_message_id")
