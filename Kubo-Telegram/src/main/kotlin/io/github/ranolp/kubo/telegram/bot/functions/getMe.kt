@@ -8,6 +8,6 @@ import io.github.ranolp.kubo.telegram.errors.NotOkError
 object getMe : TelegramFunction<TelegramUser>("getMe") {
     operator fun invoke() = request()
     override fun parse(request: Request, response: Response, result: String): TelegramUser {
-        return work(result, ::TelegramUser) ?: throw NotOkError
+        return workObject(result, ::TelegramUser) ?: throw NotOkError
     }
 }
