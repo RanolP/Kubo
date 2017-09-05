@@ -7,6 +7,6 @@ import net.dv8tion.jda.core.entities.MessageChannel
 class DiscordChat(val jdaChat: MessageChannel) : Chat {
     override val side = Discord.SIDE
     override fun sendMessage(message: String) {
-        jdaChat.sendMessage(message)
+        jdaChat.sendMessage(message).complete()
     }
 }
