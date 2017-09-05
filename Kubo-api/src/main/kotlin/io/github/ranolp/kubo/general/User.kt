@@ -1,5 +1,7 @@
 package io.github.ranolp.kubo.general
 
-open class User(map: Map<String, Any?>) : Property(map) {
-    open val displayName: String = "Nothing"
+import io.github.ranolp.kubo.general.side.Sided
+
+interface User : Sided{
+    val displayName: String
 }

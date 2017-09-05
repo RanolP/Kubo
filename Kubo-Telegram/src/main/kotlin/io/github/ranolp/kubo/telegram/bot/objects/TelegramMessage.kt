@@ -1,37 +1,38 @@
 package io.github.ranolp.kubo.telegram.bot.objects
 
+import com.github.salomonbrys.kotson.byLong
+import com.github.salomonbrys.kotson.byNullableLong
+import com.github.salomonbrys.kotson.byNullableString
+import com.google.gson.JsonObject
 import io.github.ranolp.kubo.general.Message
+import io.github.ranolp.kubo.general.side.Side
+import io.github.ranolp.kubo.telegram.Telegram
+import io.github.ranolp.kubo.telegram.util.by
+import io.github.ranolp.kubo.telegram.util.byNullable
 
-class TelegramMessage(map: Map<String, Any?>) : Message(map) {
-    val id by mapping<Long>("message_id")
-    override val from by mapping<TelegramUser?>()
-    val whenSended by mapping<Long>("date")
-    override val chat by mapping<TelegramChat>()
-    val forwardFrom by mapping<TelegramUser?>("forward_from")
-    val forwardFromChat by mapping<TelegramChat?>("forward_from_chat")
-    val forwardFromMessageId by mapping<Long?>("forward_from_message_id")
-    val fowardSignature by mapping<String?>("forward_signature")
-    val forwardDate by mapping<Long?>("forward_date")
-    val replyTo by mapping<TelegramMessage?>("reply_to_message")
-    val lastEdited by mapping<Long?>("edit_date")
-    val authorSignature by mapping<String?>("author_signature")
-    override val text by mapping<String?>()
-    // it will replace by List<TelegramMessageEntity>?
-    val entities by mapping<List<Any>?>()
-    // it will replace by Audio?
-    val audio by mapping<Any?>()
-    // it will replace by Document?
-    val document by mapping<Any?>()
-    // it will replace by Game?
-    val game by mapping<Any?>()
-    // it will replace by List<PhotoSize>?
-    val photo by mapping<List<Any>?>()
-    // it will replace by Sticker?
-    val sticker by mapping<Any?>()
-    // it will replace by Video?
-    val video by mapping<Any?>()
-    // it will replace by Voice?
-    val voice by mapping<Any?>()
+class TelegramMessage(json: JsonObject) : Message {
+    override val side: Side = Telegram.BOT_SIDE
+    val id by json.byLong("message_id")
+    override val from by json.byNullable("pinned_message", ::TelegramUser)
+    val whenSended by json.byLong("date")
+    override val chat by json.by("pinned_message", ::TelegramChat)
+    val forwardFrom by json.byNullable("forward_from", ::TelegramUser)
+    val forwardFromChat by json.byNullable("forward_from_chat", ::TelegramChat)
+    val forwardFromMessageId by json.byNullableLong("forward_from_message_id")
+    val fowardSignature by json.byNullableString("forward_signature")
+    val forwardDate by json.byNullableLong("forward_date")
+    val replyTo by json.byNullable("reply_to_message", ::TelegramMessage)
+    val lastEdited by json.byNullableLong("edit_date")
+    val authorSignature by json.byNullableString("author_signature")
+    override val text by json.byNullableString
+    // val entities by json.byList("entities", ::TelegramMessageEntity)
+    // val audio by json.byNullable("entities", ::Audio)
+    // val document by json.byNullable("document", ::Document)
+    // val game by json.byNullable("document", ::Game)
+    // val photo by json.byList("photo", ::PhotoSize)
+    // val sticker by json.byNullable("sticker", ::Sticker)
+    // val video by json.byNullable("video", ::Video)
+    // val voice by json.byNullable("voice", ::Voice)
 
     /*
 video_note	VideoNote	Optional. Message is a video note, information about the video message

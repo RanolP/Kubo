@@ -1,5 +1,6 @@
 package io.github.ranolp.kubo.telegram.util
 
+import com.github.salomonbrys.kotson.getNotNull
 import com.github.salomonbrys.kotson.toJson
 import com.github.salomonbrys.kotson.toMap
 import com.google.gson.*
@@ -27,3 +28,20 @@ fun JsonObject.toPrimitiveMap(): Map<String, Any?> {
 }
 
 fun JsonArray.toPrimitiveList() = map { it.toPrimitive() }
+
+fun <T> JsonObject.byNullable(name: String, constructor: (JsonObject) -> T): Lazy<T?> = lazy {
+    val got = this[name]
+    if (got != null && got.isJsonObject) {
+        constructor(got.asJsonObject)
+    } else {
+        null
+    }
+}
+
+fun <T> JsonObject.by(name: String, constructor: (JsonObject) -> T): Lazy<T> = lazy {
+    constructor(this.getNotNull(name) as JsonObject)
+}
+
+fun <T> JsonObject.byList(name: String, constructor: (JsonObject) -> T): Lazy<List<T>> = lazy {
+    this.getNotNull(name).asJsonArray.map { constructor(it as JsonObject) }.toList()
+}

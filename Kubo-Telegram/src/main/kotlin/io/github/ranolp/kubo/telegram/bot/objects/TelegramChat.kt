@@ -1,20 +1,26 @@
 package io.github.ranolp.kubo.telegram.bot.objects
 
+import com.github.salomonbrys.kotson.*
+import com.google.gson.JsonObject
 import io.github.ranolp.kubo.general.Chat
+import io.github.ranolp.kubo.general.side.Side
+import io.github.ranolp.kubo.telegram.Telegram
+import io.github.ranolp.kubo.telegram.util.byNullable
 
-class TelegramChat(map: Map<String, Any?>) : Chat(map) {
-    val id by mapping<Long>()
-    val type by mapping<String>()
-    val title by mapping<String?>()
-    val username by mapping<String?>()
-    val firstName by mapping<String?>("first_name")
-    val lastName by mapping<String?>("last_name")
-    val allMembersAreAdmin by mapping<Boolean?>("all_members_are_administrators")
+class TelegramChat(json: JsonObject) : Chat {
+    override val side: Side = Telegram.BOT_SIDE
+    val id by json.byLong
+    val type by json.byString
+    val title by json.byNullableString
+    val username by json.byNullableString
+    val firstName by json.byNullableString("first_name")
+    val lastName by json.byNullableString("last_name")
+    val allMembersAreAdmin by json.byBool("all_members_are_administrators", { false })
     // It will replace by ChatPhoto
-    val photo by mapping<Any?>()
-    val description by mapping<String?>()
-    val inviteLink by mapping<String?>("invite_link")
-    val pinnedMessage by mapping<TelegramMessage?>("pinned_message")
+    val photo by json.byNullableObject
+    val description by json.byNullableString
+    val inviteLink by json.byNullableString("invite_link")
+    val pinnedMessage by json.byNullable("pinned_message", ::TelegramMessage)
 
     override fun sendMessage(message: String) {
         io.github.ranolp.kubo.telegram.bot.functions.sendMessage().apply {

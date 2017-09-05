@@ -1,9 +1,9 @@
 package io.github.ranolp.kubo.general
 
-import kotlin.properties.Delegates
+import io.github.ranolp.kubo.general.side.Sided
 
-abstract class Message(map: Map<String, Any?>) : Property(map) {
-    open val text: String? = null
-    open val from: User? = null
-    open val chat: Chat by Delegates.notNull()
+interface Message : Sided {
+    val text: String?
+    val from: User?
+    val chat: Chat
 }
