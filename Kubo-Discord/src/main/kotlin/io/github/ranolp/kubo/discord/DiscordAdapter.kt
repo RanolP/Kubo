@@ -11,8 +11,7 @@ class DiscordAdapter(option: DiscordOption) : KuboAdapter<DiscordOption>(option,
         jda = JDABuilder(if(option.bot) AccountType.BOT else AccountType.CLIENT).apply {
            setToken(option.token)
         }.buildBlocking()
-        jda.addEventListener()
-
+        jda.addEventListener(DiscordEventAdapter)
     }
 
     override fun logout() {
