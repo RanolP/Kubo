@@ -4,9 +4,9 @@ import com.github.kittinunf.fuel.core.Request
 import com.github.kittinunf.fuel.core.Response
 import com.github.kittinunf.fuel.httpPost
 import com.google.gson.JsonElement
+import com.google.gson.JsonObject
 import io.github.ranolp.kubo.telegram.Telegram
 import io.github.ranolp.kubo.telegram.util.parseJson
-import io.github.ranolp.kubo.telegram.util.toPrimitiveMap
 
 abstract class TelegramFunction<T>(private val functionName: String) {
     fun request(): T {
@@ -26,10 +26,10 @@ abstract class TelegramFunction<T>(private val functionName: String) {
         }
         return null
     }
-    inline fun <T> workMap(result: String, worker: (Map<String, Any?>) -> T): T? {
+    inline fun <T> workMap(result: String, worker: (JsonObject) -> T): T? {
         val jsonObject = parseJson(result).asJsonObject
         if (jsonObject["ok"].asBoolean) {
-            return worker(jsonObject["result"].asJsonObject.toPrimitiveMap())
+            return worker(jsonObject["result"].asJsonObject)
         }
         return null
     }
