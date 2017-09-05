@@ -1,6 +1,8 @@
 package io.github.ranolp.kubo
 
 import io.github.ranolp.kubo.general.Option
+import io.github.ranolp.kubo.general.User
+import io.github.ranolp.kubo.general.side.Side
 
 fun setUp(adapter1: KuboAdapter<out Option>, vararg adapters: KuboAdapter<out Option>) {
     info("Setup adapters...")
@@ -21,3 +23,5 @@ fun <T : KuboAdapter<out Option>> setUp(adapter: T) {
 fun start(bot: Bot) {
     bot.start()
 }
+
+fun myselfOf(side: Side): User? = Adapters.getAdapter(side)?.myself

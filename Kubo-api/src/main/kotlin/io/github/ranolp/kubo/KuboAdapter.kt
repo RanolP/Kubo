@@ -1,9 +1,6 @@
 package io.github.ranolp.kubo
 
-import io.github.ranolp.kubo.general.LambdaProcessor
-import io.github.ranolp.kubo.general.Message
-import io.github.ranolp.kubo.general.Option
-import io.github.ranolp.kubo.general.Processor
+import io.github.ranolp.kubo.general.*
 import io.github.ranolp.kubo.general.command.CommandParser
 import io.github.ranolp.kubo.general.command.Commands
 import io.github.ranolp.kubo.general.event.Event
@@ -14,6 +11,7 @@ import io.github.ranolp.kubo.general.side.Sided
 import kotlin.reflect.KClass
 
 abstract class KuboAdapter<out T : Option>(protected val option: T, override val side: Side) : Sided {
+    abstract val myself: User
     abstract fun login()
 
     abstract fun logout()

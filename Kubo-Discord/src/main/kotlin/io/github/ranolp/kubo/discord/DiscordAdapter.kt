@@ -1,6 +1,8 @@
 package io.github.ranolp.kubo.discord
 
 import io.github.ranolp.kubo.KuboAdapter
+import io.github.ranolp.kubo.discord.objects.DiscordUser
+import io.github.ranolp.kubo.general.User
 import io.github.ranolp.kubo.general.command.CommandData
 import io.github.ranolp.kubo.general.command.CommandParser
 import net.dv8tion.jda.core.AccountType
@@ -9,6 +11,9 @@ import net.dv8tion.jda.core.JDABuilder
 
 class DiscordAdapter(option: DiscordOption) : KuboAdapter<DiscordOption>(option, Discord.SIDE) {
     private lateinit var jda: JDA
+    override val myself: User by lazy {
+        DiscordUser(jda.selfUser)
+    }
     override fun login() {
         jda = JDABuilder(if (option.bot) AccountType.BOT else AccountType.CLIENT).apply {
             setToken(option.token)
@@ -18,6 +23,8 @@ class DiscordAdapter(option: DiscordOption) : KuboAdapter<DiscordOption>(option,
         val prefixLen = option.commandPrefix.length
         commandParser {
             val raw = it.text!!
+            println(raw.length)
+            println(prefixLen)
             if (raw.length > prefixLen && raw.substring(0, prefixLen) != option.commandPrefix) {
                 CommandParser.Result.FAIL
             } else {
