@@ -8,7 +8,6 @@ import io.github.ranolp.kubo.telegram.bot.functions.TelegramFunction
 import io.github.ranolp.kubo.telegram.bot.objects.Update
 import io.github.ranolp.kubo.telegram.errors.NotOkError
 import io.github.ranolp.kubo.telegram.util.notNull
-import io.github.ranolp.kubo.telegram.util.toPrimitiveMap
 import kotlin.concurrent.thread
 
 internal object LongPollingUpdateHearer : UpdateHearer() {
@@ -21,7 +20,7 @@ internal object LongPollingUpdateHearer : UpdateHearer() {
         operator fun invoke() = request()
         override fun parse(request: Request, response: Response, result: String): List<Update> {
             return work(result) {
-                asJsonArray.map { Update(it.asJsonObject.toPrimitiveMap()) }
+                asJsonArray.map { Update(it.asJsonObject) }
             } ?: throw NotOkError
         }
 

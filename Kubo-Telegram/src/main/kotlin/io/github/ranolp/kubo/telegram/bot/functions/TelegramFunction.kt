@@ -19,17 +19,10 @@ abstract class TelegramFunction<T>(private val functionName: String) {
         }
     }
 
-    inline fun <T> work(result: String, worker: JsonElement.() -> T): T? {
+    inline fun <T> work(result: String, worker: JsonObject.() -> T): T? {
         val jsonObject = parseJson(result).asJsonObject
         if (jsonObject["ok"].asBoolean) {
-            return worker(jsonObject["result"])
-        }
-        return null
-    }
-    inline fun <T> workMap(result: String, worker: (JsonObject) -> T): T? {
-        val jsonObject = parseJson(result).asJsonObject
-        if (jsonObject["ok"].asBoolean) {
-            return worker(jsonObject["result"].asJsonObject)
+            return worker(jsonObject["result"] as JsonObject)
         }
         return null
     }
