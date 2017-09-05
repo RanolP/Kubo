@@ -13,7 +13,7 @@ import io.github.ranolp.kubo.telegram.util.byNullable
 class TelegramMessage(json: JsonObject) : Message {
     override val side: Side = Telegram.BOT_SIDE
     val id by json.byLong("message_id")
-    override val from by json.byNullable("pinned_message", ::TelegramUser)
+    override val from by json.byNullable("from", ::TelegramUser)
     val whenSended by json.byLong("date")
     override val chat by json.by("pinned_message", ::TelegramChat)
     val forwardFrom by json.byNullable("forward_from", ::TelegramUser)
