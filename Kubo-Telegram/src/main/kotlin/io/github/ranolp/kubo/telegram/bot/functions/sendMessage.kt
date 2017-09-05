@@ -34,7 +34,7 @@ class sendMessage : TelegramFunction<TelegramMessage>("sendMessage") {
     var replyMarkup: ReplyMarkup? = null
 
     override fun parse(request: Request, response: Response, result: String): TelegramMessage {
-        return work(result, ::TelegramMessage) ?: throw NotOkError
+        return workObject(result, ::TelegramMessage) ?: throw NotOkError
     }
 
     override fun generateArguments(): Map<String, Any?> {
