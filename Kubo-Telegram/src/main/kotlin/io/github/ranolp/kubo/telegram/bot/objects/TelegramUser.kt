@@ -17,6 +17,8 @@ class TelegramUser(json: JsonObject) : User {
     val lastName by json.byNullableString("last_name")
     val username by json.byNullableString
     val languageCode by json.byNullableString("language_code")
+    override val isSelf: Boolean
+        get() = Telegram.getAdapter().myself === this
     override val displayName: String by lazy {
         "$firstName ${lastName ?: ""}".trim()
     }
