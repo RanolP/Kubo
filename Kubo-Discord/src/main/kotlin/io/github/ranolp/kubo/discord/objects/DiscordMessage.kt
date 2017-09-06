@@ -15,4 +15,8 @@ class DiscordMessage(val jdaMessage: net.dv8tion.jda.core.entities.Message) : Me
     override val chat: Chat by lazy {
         DiscordChat(jdaMessage.channel)
     }
+
+    override fun delete() {
+        jdaMessage.delete().complete()
+    }
 }

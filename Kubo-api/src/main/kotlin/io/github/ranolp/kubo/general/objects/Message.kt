@@ -6,4 +6,6 @@ interface Message : Sided {
     val text: String?
     val from: User?
     val chat: Chat
+
+    fun delete()
 }

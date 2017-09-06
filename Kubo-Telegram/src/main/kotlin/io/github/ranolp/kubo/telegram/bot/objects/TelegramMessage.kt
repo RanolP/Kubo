@@ -56,6 +56,10 @@ invoice	Invoice	Optional. Message is an invoice for a payment, information about
 successful_payment	SuccessfulPayment	Optional. Message is a service message about a successful payment, information about the payment. More about payments »
      */
 
+    override fun delete() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     override fun toString(): String {
         return "TelegramMessage(id=$id, from=$from, when=$whenSended, chat=$chat)"
     }
