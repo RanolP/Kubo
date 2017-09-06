@@ -6,6 +6,11 @@ interface Message : Sided {
     val text: String?
     val from: User?
     val chat: Chat
+    val myself: Boolean
+        get() {
+            val tmp = from
+            return tmp != null && tmp.isSelf
+        }
 
     fun delete()
 }

@@ -1,6 +1,8 @@
 package io.github.ranolp.kubo
 
-import io.github.ranolp.kubo.general.*
+import io.github.ranolp.kubo.general.LambdaProcessor
+import io.github.ranolp.kubo.general.Option
+import io.github.ranolp.kubo.general.Processor
 import io.github.ranolp.kubo.general.command.CommandParser
 import io.github.ranolp.kubo.general.command.Commands
 import io.github.ranolp.kubo.general.event.Event
@@ -23,7 +25,7 @@ abstract class KuboAdapter<out T : Option>(protected val option: T, override val
     init {
         watch<HearEvent> {
             val tmp = commandParser
-            if (tmp != null && it.side == tmp.side && it.message.text != null) {
+            if (tmp != null && it.side == tmp.side && it.message.text != null && !it.message.myself) {
                 val result = tmp.parse(it.message)
                 if (result.ok) {
                     Commands.dispatch(result.commandData)
