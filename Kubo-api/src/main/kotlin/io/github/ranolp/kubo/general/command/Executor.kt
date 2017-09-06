@@ -3,6 +3,7 @@ package io.github.ranolp.kubo.general.command
 import io.github.ranolp.kubo.general.Chat
 import io.github.ranolp.kubo.general.Message
 import io.github.ranolp.kubo.general.User
+import io.github.ranolp.kubo.general.side.Side
 
 open class Executor internal constructor(private val command: CommandStructure) {
     private class SubExecutor(private val parent: Executor, command: CommandStructure) : Executor(command) {
@@ -19,6 +20,8 @@ open class Executor internal constructor(private val command: CommandStructure) 
         get() = message.from
     val chat: Chat?
         get() = message.chat
+    val side: Side
+        get() = message.side
 
     internal fun subExecutor(command: CommandStructure): Executor = SubExecutor(this, command)
 

@@ -27,4 +27,8 @@ object Commands {
     fun dispatch(commandData: CommandData) {
         registeredCommands[commandData.label.toLowerCase()]?.let { it(executors[it]!!, commandData) }
     }
+    fun new(name: String, description: String? = null, vararg aliases: String = emptyArray(), executorFunction: Executor.(CommandData) -> Unit) {
+        val command = Command(name, description, *aliases, executorFunction = executorFunction)
+        Commands.register(command)
+    }
 }
