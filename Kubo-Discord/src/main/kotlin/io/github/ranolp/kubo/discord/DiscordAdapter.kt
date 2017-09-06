@@ -1,8 +1,8 @@
 package io.github.ranolp.kubo.discord
 
 import io.github.ranolp.kubo.KuboAdapter
-import io.github.ranolp.kubo.discord.objects.DiscordUser
-import io.github.ranolp.kubo.general.User
+import io.github.ranolp.kubo.discord.objects.DiscordSelfUser
+import io.github.ranolp.kubo.general.objects.User
 import io.github.ranolp.kubo.general.command.CommandData
 import io.github.ranolp.kubo.general.command.CommandParser
 import net.dv8tion.jda.core.AccountType
@@ -12,7 +12,7 @@ import net.dv8tion.jda.core.JDABuilder
 class DiscordAdapter(option: DiscordOption) : KuboAdapter<DiscordOption>(option, Discord.SIDE) {
     private lateinit var jda: JDA
     override val myself: User by lazy {
-        DiscordUser(jda.selfUser)
+        DiscordSelfUser(jda.selfUser)
     }
     override fun login() {
         jda = JDABuilder(if (option.bot) AccountType.BOT else AccountType.CLIENT).apply {

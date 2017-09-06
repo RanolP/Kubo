@@ -5,7 +5,7 @@ import com.github.salomonbrys.kotson.byLong
 import com.github.salomonbrys.kotson.byNullableString
 import com.github.salomonbrys.kotson.byString
 import com.google.gson.JsonObject
-import io.github.ranolp.kubo.general.User
+import io.github.ranolp.kubo.general.objects.User
 import io.github.ranolp.kubo.general.side.Side
 import io.github.ranolp.kubo.telegram.Telegram
 

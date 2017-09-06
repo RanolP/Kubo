@@ -6,6 +6,8 @@ import io.github.ranolp.kubo.general.command.Commands
 import io.github.ranolp.kubo.general.event.Event
 import io.github.ranolp.kubo.general.event.Events
 import io.github.ranolp.kubo.general.event.HearEvent
+import io.github.ranolp.kubo.general.objects.Message
+import io.github.ranolp.kubo.general.objects.User
 import io.github.ranolp.kubo.general.side.Side
 import io.github.ranolp.kubo.general.side.Sided
 import kotlin.reflect.KClass

@@ -1,6 +1,6 @@
 package io.github.ranolp.kubo.general.command
 
-import io.github.ranolp.kubo.general.Message
+import io.github.ranolp.kubo.general.objects.Message
 
 class CommandData(val label: String, val message: Message, val args: List<String>) {
     val caller = message.from

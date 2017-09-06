@@ -1,8 +1,8 @@
 package io.github.ranolp.kubo.general.command
 
-import io.github.ranolp.kubo.general.Chat
-import io.github.ranolp.kubo.general.Message
-import io.github.ranolp.kubo.general.User
+import io.github.ranolp.kubo.general.objects.Chat
+import io.github.ranolp.kubo.general.objects.Message
+import io.github.ranolp.kubo.general.objects.User
 import io.github.ranolp.kubo.general.side.Side
 
 open class Executor internal constructor(private val command: CommandStructure) {

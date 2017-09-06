@@ -1,7 +1,7 @@
 package io.github.ranolp.kubo.discord.objects
 
 import io.github.ranolp.kubo.discord.Discord
-import io.github.ranolp.kubo.general.User
+import io.github.ranolp.kubo.general.objects.User
 
 open class DiscordUser internal constructor(val jdaUser: net.dv8tion.jda.core.entities.User) : User {
     override val side = Discord.SIDE
@@ -11,4 +11,7 @@ open class DiscordUser internal constructor(val jdaUser: net.dv8tion.jda.core.en
     override fun toString(): String {
         return displayName
     }
+
+    override val isSelf: Boolean
+        get() = Discord.getAdapter().myself === this
 }

@@ -1,6 +1,6 @@
 package io.github.ranolp.kubo.general.command
 
-import io.github.ranolp.kubo.general.Message
+import io.github.ranolp.kubo.general.objects.Message
 import io.github.ranolp.kubo.general.side.Side
 
 abstract class CommandParser(val side: Side) {

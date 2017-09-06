@@ -3,7 +3,7 @@ package io.github.ranolp.kubo.telegram.bot
 import com.github.kittinunf.fuel.core.Request
 import com.github.kittinunf.fuel.core.Response
 import io.github.ranolp.kubo.KuboAdapter
-import io.github.ranolp.kubo.general.User
+import io.github.ranolp.kubo.general.objects.User
 import io.github.ranolp.kubo.general.command.CommandData
 import io.github.ranolp.kubo.general.command.CommandParser
 import io.github.ranolp.kubo.telegram.Telegram

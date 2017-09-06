@@ -2,7 +2,7 @@ package io.github.ranolp.kubo.telegram.bot.objects
 
 import com.github.salomonbrys.kotson.*
 import com.google.gson.JsonObject
-import io.github.ranolp.kubo.general.Chat
+import io.github.ranolp.kubo.general.objects.Chat
 import io.github.ranolp.kubo.general.side.Side
 import io.github.ranolp.kubo.telegram.Telegram
 import io.github.ranolp.kubo.telegram.util.byNullable
@@ -11,7 +11,7 @@ class TelegramChat(json: JsonObject) : Chat {
     override val side: Side = Telegram.BOT_SIDE
     val id by json.byLong
     val type by json.byString
-    val title by json.byNullableString
+    override val title by json.byNullableString
     val username by json.byNullableString
     val firstName by json.byNullableString("first_name")
     val lastName by json.byNullableString("last_name")
