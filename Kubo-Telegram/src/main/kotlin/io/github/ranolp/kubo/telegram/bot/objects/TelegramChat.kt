@@ -3,6 +3,7 @@ package io.github.ranolp.kubo.telegram.bot.objects
 import com.github.salomonbrys.kotson.*
 import com.google.gson.JsonObject
 import io.github.ranolp.kubo.general.objects.Chat
+import io.github.ranolp.kubo.general.objects.History
 import io.github.ranolp.kubo.general.side.Side
 import io.github.ranolp.kubo.telegram.Telegram
 import io.github.ranolp.kubo.telegram.util.byNullable
@@ -27,5 +28,9 @@ class TelegramChat(json: JsonObject) : Chat {
             chatId = id.toString()
             text = message
         }.request()
+    }
+
+    override fun history(): History {
+        TODO("not implemented")
     }
 }
