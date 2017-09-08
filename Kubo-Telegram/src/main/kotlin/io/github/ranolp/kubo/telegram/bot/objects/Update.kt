@@ -10,5 +10,5 @@ class Update(json: JsonObject) {
     }
 
     val id by json.byLong("update_id")
-    val message by json.byNullable("message", ::TelegramMessage)
+    val message by json.byNullable("message", ::TelegramBotMessage)
 }

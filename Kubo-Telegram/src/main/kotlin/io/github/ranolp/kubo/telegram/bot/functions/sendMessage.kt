@@ -3,14 +3,14 @@ package io.github.ranolp.kubo.telegram.bot.functions
 import com.github.kittinunf.fuel.core.Request
 import com.github.kittinunf.fuel.core.Response
 import io.github.ranolp.kubo.telegram.bot.objects.ReplyMarkup
-import io.github.ranolp.kubo.telegram.bot.objects.TelegramMessage
+import io.github.ranolp.kubo.telegram.bot.objects.TelegramBotMessage
 import io.github.ranolp.kubo.telegram.errors.NotOkError
 import io.github.ranolp.kubo.telegram.general.MessageParseMode
 import io.github.ranolp.kubo.telegram.util.notNull
 
-class sendMessage : TelegramFunction<TelegramMessage>("sendMessage") {
+class sendMessage : TelegramFunction<TelegramBotMessage>("sendMessage") {
     companion object {
-        operator fun invoke(chatId: String, text: String, parseMode: MessageParseMode? = null, webPreview: Boolean? = null, notify: Boolean? = null, replyTo: Int? = null, replyMarkup: ReplyMarkup? = null): TelegramMessage {
+        operator fun invoke(chatId: String, text: String, parseMode: MessageParseMode? = null, webPreview: Boolean? = null, notify: Boolean? = null, replyTo: Int? = null, replyMarkup: ReplyMarkup? = null): TelegramBotMessage {
             return sendMessage().apply {
                 this.chatId = chatId
                 this.text = text
@@ -33,8 +33,8 @@ class sendMessage : TelegramFunction<TelegramMessage>("sendMessage") {
     var replyTo: Int? = null
     var replyMarkup: ReplyMarkup? = null
 
-    override fun parse(request: Request, response: Response, result: String): TelegramMessage {
-        return workObject(result, ::TelegramMessage) ?: throw NotOkError
+    override fun parse(request: Request, response: Response, result: String): TelegramBotMessage {
+        return workObject(result, ::TelegramBotMessage) ?: throw NotOkError
     }
 
     override fun generateArguments(): Map<String, Any?> {

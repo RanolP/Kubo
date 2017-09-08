@@ -7,6 +7,7 @@ import io.github.ranolp.kubo.telegram.bot.TelegramBotAdapter
 
 object Telegram {
     val BOT_SIDE = Side("Telegram", true, false)
+    val CLIENT_SIDE = Side("Telegram", false, true)
 
     fun getAdapter() = Adapters.getTypedAdapter<TelegramBotAdapter>(BOT_SIDE)!!
 }

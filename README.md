@@ -44,3 +44,6 @@ All dependencies are managed automatically by Gradle
   * Kotson
     * Version: 2.5.0
     * [Github](https://github.com/SalomonBrys/Kotson)
+  * Kotlogram
+    * Version: 1.0.0-RC3
+    * [Github](https://github.com/badoualy/kotlogram)

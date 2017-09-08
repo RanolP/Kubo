@@ -10,18 +10,18 @@ import io.github.ranolp.kubo.telegram.Telegram
 import io.github.ranolp.kubo.telegram.util.by
 import io.github.ranolp.kubo.telegram.util.byNullable
 
-class TelegramMessage(json: JsonObject) : Message {
+class TelegramBotMessage(json: JsonObject) : Message {
     override val side: Side = Telegram.BOT_SIDE
     val id by json.byLong("message_id")
-    override val from by json.byNullable("from", ::TelegramUser)
+    override val from by json.byNullable("from", ::TelegramBotUser)
     val whenSended by json.byLong("date")
-    override val chat by json.by("chat", ::TelegramChat)
-    val forwardFrom by json.byNullable("forward_from", ::TelegramUser)
-    val forwardFromChat by json.byNullable("forward_from_chat", ::TelegramChat)
+    override val chat by json.by("chat", ::TelegramBotChat)
+    val forwardFrom by json.byNullable("forward_from", ::TelegramBotUser)
+    val forwardFromChat by json.byNullable("forward_from_chat", ::TelegramBotChat)
     val forwardFromMessageId by json.byNullableLong("forward_from_message_id")
     val fowardSignature by json.byNullableString("forward_signature")
     val forwardDate by json.byNullableLong("forward_date")
-    val replyTo by json.byNullable("reply_to_message", ::TelegramMessage)
+    val replyTo by json.byNullable("reply_to_message", ::TelegramBotMessage)
     val lastEdited by json.byNullableLong("edit_date")
     val authorSignature by json.byNullableString("author_signature")
     override val text by json.byNullableString
@@ -61,6 +61,6 @@ successful_payment	SuccessfulPayment	Optional. Message is a service message abou
     }
 
     override fun toString(): String {
-        return "TelegramMessage(id=$id, from=$from, when=$whenSended, chat=$chat)"
+        return "TelegramBotMessage(id=$id, from=$from, when=$whenSended, chat=$chat)"
     }
 }

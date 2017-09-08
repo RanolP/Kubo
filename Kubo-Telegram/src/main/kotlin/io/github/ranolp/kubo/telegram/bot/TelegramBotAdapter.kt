@@ -10,14 +10,14 @@ import io.github.ranolp.kubo.telegram.Telegram
 import io.github.ranolp.kubo.telegram.bot.event.TelegramBotHearEvent
 import io.github.ranolp.kubo.telegram.bot.event.TelegramUpdateEvent
 import io.github.ranolp.kubo.telegram.bot.functions.TelegramFunction
-import io.github.ranolp.kubo.telegram.bot.objects.TelegramUser
+import io.github.ranolp.kubo.telegram.bot.objects.TelegramBotUser
 import io.github.ranolp.kubo.telegram.errors.NotOkError
 
 class TelegramBotAdapter(option: TelegramBotOption) : KuboAdapter<TelegramBotOption>(option, Telegram.BOT_SIDE) {
-    private object getMe : TelegramFunction<TelegramUser>("getMe") {
+    private object getMe : TelegramFunction<TelegramBotUser>("getMe") {
         operator fun invoke() = request()
-        override fun parse(request: Request, response: Response, result: String): TelegramUser {
-            return workObject(result, ::TelegramUser) ?: throw NotOkError
+        override fun parse(request: Request, response: Response, result: String): TelegramBotUser {
+            return workObject(result, ::TelegramBotUser) ?: throw NotOkError
         }
     }
 

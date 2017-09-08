@@ -8,7 +8,7 @@ import io.github.ranolp.kubo.general.side.Side
 import io.github.ranolp.kubo.telegram.Telegram
 import io.github.ranolp.kubo.telegram.util.byNullable
 
-class TelegramChat(json: JsonObject) : Chat {
+class TelegramBotChat(json: JsonObject) : Chat {
     override val side: Side = Telegram.BOT_SIDE
     val id by json.byLong
     val type by json.byString
@@ -21,7 +21,7 @@ class TelegramChat(json: JsonObject) : Chat {
     val photo by json.byNullableObject
     val description by json.byNullableString
     val inviteLink by json.byNullableString("invite_link")
-    val pinnedMessage by json.byNullable("pinned_message", ::TelegramMessage)
+    val pinnedMessage by json.byNullable("pinned_message", ::TelegramBotMessage)
 
     override fun sendMessage(message: String) {
         io.github.ranolp.kubo.telegram.bot.functions.sendMessage().apply {
