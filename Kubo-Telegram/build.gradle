@@ -17,6 +17,7 @@ apply plugin: 'kotlin'
 repositories {
 	mavenCentral()
 	jcenter()
+	maven { url "https://jitpack.io" }
 }
 
 dependencies {
@@ -24,6 +25,7 @@ dependencies {
 	compile project(':Kubo-api')
 	compile 'com.github.kittinunf.fuel:fuel:1.9.0'
 	compile 'com.github.salomonbrys.kotson:kotson:2.5.0'
+	compile 'com.github.badoualy:kotlogram:1.0.0-RC3'
 }
 
 compileKotlin {
