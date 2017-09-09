@@ -10,7 +10,7 @@ import io.github.ranolp.kubo.telegram.util.parseJson
 
 abstract class TelegramFunction<T>(private val functionName: String) {
     fun request(): T {
-        val (request, response, result) = "https://api.telegram.org/bot${Telegram.getAdapter().getToken()}/$functionName".httpPost(generateArguments().toList()).responseString()
+        val (request, response, result) = "https://api.telegram.org/bot${Telegram.getBotAdapter().getToken()}/$functionName".httpPost(generateArguments().toList()).responseString()
         val (data, error) = result
         if (error != null) {
             throw error

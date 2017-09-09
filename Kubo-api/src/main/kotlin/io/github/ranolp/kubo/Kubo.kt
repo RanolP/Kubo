@@ -4,7 +4,7 @@ import io.github.ranolp.kubo.general.Option
 import io.github.ranolp.kubo.general.objects.User
 import io.github.ranolp.kubo.general.side.Side
 
-fun setUp(adapter1: KuboAdapter<out Option>, vararg adapters: KuboAdapter<out Option>) {
+fun setUp(adapter1: KuboAdapter<Option>, vararg adapters: KuboAdapter<Option>) {
     info("Setup adapters...")
     info("Inserted adapter count : ${adapters.size + 1}")
     setUp(adapter1)
@@ -13,7 +13,7 @@ fun setUp(adapter1: KuboAdapter<out Option>, vararg adapters: KuboAdapter<out Op
     }
 }
 
-fun <T : KuboAdapter<out Option>> setUp(adapter: T) {
+fun <T : KuboAdapter<Option>> setUp(adapter: T) {
     info("Setup ${adapter::class.simpleName}...")
     Adapters.put(adapter.side, adapter)
     adapter.login()

@@ -66,7 +66,7 @@ class TelegramBotAdapter(option: TelegramBotOption) : KuboAdapter<TelegramBotOpt
                     at == -1 -> ""
                     space == -1 -> raw.substring(at + 1)
                     else -> raw.substring(at + 1..space - 1)
-                }.let { it.isEmpty() || it.equals(Telegram.getAdapter().getUsername(), true) }) {
+                }.let { it.isEmpty() || it.equals(Telegram.getBotAdapter().getUsername(), true) }) {
                     CommandParser.Result.FAIL
                 } else {
                     val arguments = when (space) {

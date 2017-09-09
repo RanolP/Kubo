@@ -15,7 +15,7 @@ class TelegramBotUser(json: JsonObject) : TelegramUser {
     override val username by json.byNullableString
     override val languageCode by json.byNullableString("language_code")
     override val isSelf: Boolean
-        get() = Telegram.getAdapter().myself === this
+        get() = Telegram.getBotAdapter().myself === this
 
     override fun toString(): String {
         return (if (isBot) "(bot)" else "") + " " + firstName + " " + (lastName ?: "") + "{" + (if (username != null) "@$username" else "") + (if (languageCode != null) "($languageCode)" else "") + "}"
