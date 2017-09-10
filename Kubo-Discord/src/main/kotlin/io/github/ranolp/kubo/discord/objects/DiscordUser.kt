@@ -13,5 +13,5 @@ open class DiscordUser internal constructor(val jdaUser: net.dv8tion.jda.core.en
     }
 
     override val isSelf: Boolean
-        get() = Discord.getAdapter().myself === this
+        get() = Discord.getAdapter().myself.jdaUser == jdaUser
 }
