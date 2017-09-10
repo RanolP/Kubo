@@ -10,6 +10,7 @@ import io.github.ranolp.kubo.telegram.Telegram
 import io.github.ranolp.kubo.telegram.bot.event.TelegramBotHearEvent
 import io.github.ranolp.kubo.telegram.bot.event.TelegramUpdateEvent
 import io.github.ranolp.kubo.telegram.bot.functions.TelegramFunction
+import io.github.ranolp.kubo.telegram.bot.objects.TelegramBotChat
 import io.github.ranolp.kubo.telegram.bot.objects.TelegramBotUser
 import io.github.ranolp.kubo.telegram.errors.NotOkError
 
@@ -18,6 +19,22 @@ class TelegramBotAdapter(option: TelegramBotOption) : KuboAdapter<TelegramBotOpt
         operator fun invoke() = request()
         override fun parse(request: Request, response: Response, result: String): TelegramBotUser {
             return workObject(result, ::TelegramBotUser) ?: throw NotOkError
+        }
+    }
+
+    private object getChat : TelegramFunction<TelegramBotChat>("getChat") {
+        operator fun invoke(id: String): TelegramBotChat {
+            chatId = id
+            return request()
+        }
+
+        private lateinit var chatId: String
+        override fun parse(request: Request, response: Response, result: String): TelegramBotChat {
+            return workObject(result, ::TelegramBotChat) ?: throw NotOkError
+        }
+
+        override fun generateArguments(): Map<String, Any?> {
+            return mapOf("chat_id" to chatId)
         }
     }
 
@@ -86,4 +103,12 @@ class TelegramBotAdapter(option: TelegramBotOption) : KuboAdapter<TelegramBotOpt
     fun getUsername() = option.botName
 
     fun getToken() = option.token
+
+    fun getChat(id: String): TelegramBotChat {
+        return getChat.invoke(id)
+    }
+
+    fun getChat(id: Long): TelegramBotChat {
+        return getChat.invoke(id.toString())
+    }
 }

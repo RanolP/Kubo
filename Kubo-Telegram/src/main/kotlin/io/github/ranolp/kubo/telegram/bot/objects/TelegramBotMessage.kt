@@ -12,6 +12,9 @@ import io.github.ranolp.kubo.telegram.Telegram
 import io.github.ranolp.kubo.telegram.bot.functions.TelegramFunction
 import io.github.ranolp.kubo.telegram.util.by
 import io.github.ranolp.kubo.telegram.util.byNullable
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 class TelegramBotMessage(json: JsonObject) : Message {
     private object deleteMessage : TelegramFunction<Boolean>("deleteMessage") {
@@ -35,7 +38,9 @@ class TelegramBotMessage(json: JsonObject) : Message {
     override val side: Side = Telegram.BOT_SIDE
     val id by json.byLong("message_id")
     override val from by json.byNullable("from", ::TelegramBotUser)
-    val whenSended by json.byLong("date")
+    override val whenSended: LocalDateTime by lazy {
+        Instant.ofEpochMilli(json["date"].asLong * 1000).atZone(ZoneId.systemDefault()).toLocalDateTime()
+    }
     override val chat by json.by("chat", ::TelegramBotChat)
     val forwardFrom by json.byNullable("forward_from", ::TelegramBotUser)
     val forwardFromChat by json.byNullable("forward_from_chat", ::TelegramBotChat)

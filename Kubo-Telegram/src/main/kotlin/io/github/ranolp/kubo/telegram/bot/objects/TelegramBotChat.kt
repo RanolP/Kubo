@@ -67,7 +67,7 @@ class TelegramBotChat(json: JsonObject) : TelegramChat {
         }
 
         override fun parse(request: Request, response: Response, result: String): TelegramBotChat {
-            return workObject(result, ::TelegramBotChat)!!
+            return workObject(result, ::TelegramBotChat) ?: throw NotOkError
         }
 
         override fun generateArguments(): Map<String, Any?> {
