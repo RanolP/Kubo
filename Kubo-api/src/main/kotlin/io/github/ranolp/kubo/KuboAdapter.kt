@@ -25,7 +25,7 @@ abstract class KuboAdapter<out T : Option>(protected val option: T, override val
     init {
         watch<HearEvent> {
             val tmp = commandParser
-            if (tmp != null && it.side == tmp.side && it.message.text != null && !it.message.myself) {
+            if (tmp != null && it.side == tmp.side && it.message.text != null && !it.message.own) {
                 val result = tmp.parse(it.message)
                 if (result.ok) {
                     Commands.dispatch(result.commandData)
