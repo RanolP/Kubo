@@ -5,9 +5,9 @@ import io.github.ranolp.kubo.general.side.Side
 import java.util.*
 
 object Adapters {
-    private val adapterMap = HashMap<Side, KuboAdapter<out Option>>()
+    private val adapterMap = HashMap<Side, KuboAdapter<Option>>()
 
-    internal fun put(side: Side, kuboAdapter: KuboAdapter<out Option>) {
+    internal fun put(side: Side, kuboAdapter: KuboAdapter<Option>) {
         adapterMap[side] = kuboAdapter
     }
 
@@ -15,5 +15,5 @@ object Adapters {
 
     fun all() = adapterMap.values
 
-    inline fun <reified T : KuboAdapter<out Option>> getTypedAdapter(side: Side) = getAdapter(side) as? T
+    inline fun <reified T : KuboAdapter<Option>> getTypedAdapter(side: Side) = getAdapter(side) as? T
 }

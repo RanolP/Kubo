@@ -8,7 +8,7 @@ import com.google.gson.JsonObject
 import io.github.ranolp.kubo.telegram.Telegram
 import io.github.ranolp.kubo.telegram.util.parseJson
 
-abstract class TelegramFunction<T>(private val functionName: String) {
+internal abstract class TelegramFunction<T>(private val functionName: String) {
     fun request(): T {
         val (request, response, result) = "https://api.telegram.org/bot${Telegram.getBotAdapter().getToken()}/$functionName".httpPost(generateArguments().toList()).responseString()
         val (data, error) = result

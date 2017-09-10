@@ -18,7 +18,7 @@ open class Executor internal constructor(private val command: CommandStructure) 
         get() = commandData.message
     val from: User?
         get() = message.from
-    val chat: Chat?
+    val chat: Chat
         get() = message.chat
     val side: Side
         get() = message.side

@@ -1,5 +1,7 @@
 package io.github.ranolp.kubo.telegram.bot.objects
 
+import com.github.kittinunf.fuel.core.Request
+import com.github.kittinunf.fuel.core.Response
 import com.github.salomonbrys.kotson.byLong
 import com.github.salomonbrys.kotson.byNullableLong
 import com.github.salomonbrys.kotson.byNullableString
@@ -7,10 +9,29 @@ import com.google.gson.JsonObject
 import io.github.ranolp.kubo.general.objects.Message
 import io.github.ranolp.kubo.general.side.Side
 import io.github.ranolp.kubo.telegram.Telegram
+import io.github.ranolp.kubo.telegram.bot.functions.TelegramFunction
 import io.github.ranolp.kubo.telegram.util.by
 import io.github.ranolp.kubo.telegram.util.byNullable
 
 class TelegramBotMessage(json: JsonObject) : Message {
+    private object deleteMessage : TelegramFunction<Boolean>("deleteMessage") {
+        operator fun invoke(message: TelegramBotMessage): Boolean {
+            chatId = message.chat.id.toString()
+            messageId = message.id
+            return request()
+        }
+
+        private lateinit var chatId: String
+        private var messageId: Long = 0L
+        override fun parse(request: Request, response: Response, result: String): Boolean {
+            return false
+        }
+
+        override fun generateArguments(): Map<String, Any?> {
+            return mapOf("chat_id" to chatId, "message_id" to messageId)
+        }
+    }
+
     override val side: Side = Telegram.BOT_SIDE
     val id by json.byLong("message_id")
     override val from by json.byNullable("from", ::TelegramBotUser)
@@ -57,6 +78,10 @@ successful_payment	SuccessfulPayment	Optional. Message is a service message abou
      */
 
     override fun delete() {
+        deleteMessage(this)
+    }
+
+    override fun edit(message: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

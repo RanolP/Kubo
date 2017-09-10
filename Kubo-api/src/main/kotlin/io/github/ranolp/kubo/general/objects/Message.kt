@@ -1,5 +1,7 @@
 package io.github.ranolp.kubo.general.objects
 
+import io.github.ranolp.kubo.general.error.CannotDeleteError
+import io.github.ranolp.kubo.general.error.NotOwnerError
 import io.github.ranolp.kubo.general.side.Sided
 
 interface Message : Sided {
@@ -12,5 +14,7 @@ interface Message : Sided {
             return tmp != null && tmp.isSelf
         }
 
-    fun delete()
+    @Throws(NotOwnerError::class, CannotDeleteError::class) fun delete()
+    @Throws(NotOwnerError::class) fun edit(message: String)
+
 }

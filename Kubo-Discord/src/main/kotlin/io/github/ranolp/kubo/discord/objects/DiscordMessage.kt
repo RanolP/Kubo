@@ -8,7 +8,7 @@ import io.github.ranolp.kubo.general.side.Side
 
 class DiscordMessage(val jdaMessage: net.dv8tion.jda.core.entities.Message) : Message {
     override val side: Side = Discord.SIDE
-    override val text = jdaMessage.rawContent
+    override val text: String? = jdaMessage.rawContent
     override val from: User? by lazy {
         DiscordUser(jdaMessage.author)
     }
@@ -18,5 +18,9 @@ class DiscordMessage(val jdaMessage: net.dv8tion.jda.core.entities.Message) : Me
 
     override fun delete() {
         jdaMessage.delete().complete()
+    }
+
+    override fun edit(message: String) {
+        jdaMessage.editMessage(message).complete()
     }
 }

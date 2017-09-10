@@ -34,7 +34,7 @@ abstract class KuboAdapter<out T : Option>(protected val option: T, override val
         }
     }
 
-    fun isSupported(a: KClass<in Event>) {
+    fun isSupported(a: KClass<Event>) {
 
     }
 
